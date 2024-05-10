@@ -1,12 +1,21 @@
 import { useForm } from "react-hook-form";
 import style from "../auth.module.css";
 import { Register } from "../../../types";
+import { useCanister } from "@connect2ic/react";
 
 const RegisterForm = () => {
+  const [usuarios_backend] = useCanister("usuarios_backend");
   const { formState, register, handleSubmit } = useForm<Register>();
-  const onSubmit = (data: Register) => {
-    console.log(data);
+
+  const onSubmit = async (data: Register) => {
+    try {
+      await usuarios_backend.createUser(data);
+      alert("Usuario registrado correctamente");
+    } catch (error) {
+      alert("Error al registrar el usuario");
+    }
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={`${style.RegisterForm}`}>
       <div className="">
