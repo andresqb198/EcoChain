@@ -18,7 +18,7 @@
   font-size: 2rem;
   font-weight: bolder;
   margin-bottom: 1rem;
-  color: #8c9fbd;
+  color: #3a68b1;
 }
 
 .Form {
@@ -37,13 +37,20 @@
 }
 
 .Button {
+  width: 100%;
   padding: 0.7rem 1rem;
-  background-color: #8c9fbd;
+  background-color: #3a68b1;
   color: white;
   font-weight: bold;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.Button:hover {
+  background-color: #4c83dd;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .Aside {
@@ -65,4 +72,31 @@
   font-weight: 700;
   margin-bottom: 1rem;
   bottom: 0;
+}
+
+.Register {
+  padding: 2rem 0;
+  min-height: 100vh;
+  border: 1px solid;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.RegisterForm {
+  max-width: 600px;
+  font-size: 0.8rem;
+}
+
+.ContainerInputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.Error {
+  color: red;
+  font-size: 0.8rem;
 }
