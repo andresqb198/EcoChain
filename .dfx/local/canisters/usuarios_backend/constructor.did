@@ -1,21 +1,32 @@
 service : () -> {
-  createUser : (text, text, text, text) -> (
+  createAction : (text, text, text, text) -> (int);
+  createUser : (text, text, text, text, text, text, text, int, int) -> (
       record {
         id : principal;
+        direccion : text;
+        tokensPorValidar : int;
         alias : text;
         nombre : text;
         segundoApellido : text;
         primerApellido : text;
+        tokensValidados : int;
+        fechaNacimiento : text;
+        cedula : text;
       },
     );
   deleteUser : (text) -> (
       variant {
         Ok : record {
           id : principal;
+          direccion : text;
+          tokensPorValidar : int;
           alias : text;
           nombre : text;
           segundoApellido : text;
           primerApellido : text;
+          tokensValidados : int;
+          fechaNacimiento : text;
+          cedula : text;
         };
         Err : variant { UserDoesNotExist : text };
       },
@@ -23,29 +34,44 @@ service : () -> {
   readUserById : (text) -> (
       opt record {
         id : principal;
+        direccion : text;
+        tokensPorValidar : int;
         alias : text;
         nombre : text;
         segundoApellido : text;
         primerApellido : text;
+        tokensValidados : int;
+        fechaNacimiento : text;
+        cedula : text;
       },
     ) query;
   readUsers : () -> (
       vec record {
         id : principal;
+        direccion : text;
+        tokensPorValidar : int;
         alias : text;
         nombre : text;
         segundoApellido : text;
         primerApellido : text;
+        tokensValidados : int;
+        fechaNacimiento : text;
+        cedula : text;
       },
     ) query;
-  updateUser : (text, text, text, text, text) -> (
+  updateUser : (text, text, text, text, text, text, text, text, int, int) -> (
       variant {
         Ok : record {
           id : principal;
+          direccion : text;
+          tokensPorValidar : int;
           alias : text;
           nombre : text;
           segundoApellido : text;
           primerApellido : text;
+          tokensValidados : int;
+          fechaNacimiento : text;
+          cedula : text;
         };
         Err : variant { UserDoesNotExist : text };
       },

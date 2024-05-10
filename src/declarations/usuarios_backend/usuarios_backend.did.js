@@ -1,14 +1,34 @@
 export const idlFactory = ({ IDL }) => {
   return IDL.Service({
-    'createUser' : IDL.Func(
+    'createAction' : IDL.Func(
         [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [IDL.Int],
+        [],
+      ),
+    'createUser' : IDL.Func(
+        [
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Int,
+          IDL.Int,
+        ],
         [
           IDL.Record({
             'id' : IDL.Principal,
+            'direccion' : IDL.Text,
+            'tokensPorValidar' : IDL.Int,
             'alias' : IDL.Text,
             'nombre' : IDL.Text,
             'segundoApellido' : IDL.Text,
             'primerApellido' : IDL.Text,
+            'tokensValidados' : IDL.Int,
+            'fechaNacimiento' : IDL.Text,
+            'cedula' : IDL.Text,
           }),
         ],
         [],
@@ -19,10 +39,15 @@ export const idlFactory = ({ IDL }) => {
           IDL.Variant({
             'Ok' : IDL.Record({
               'id' : IDL.Principal,
+              'direccion' : IDL.Text,
+              'tokensPorValidar' : IDL.Int,
               'alias' : IDL.Text,
               'nombre' : IDL.Text,
               'segundoApellido' : IDL.Text,
               'primerApellido' : IDL.Text,
+              'tokensValidados' : IDL.Int,
+              'fechaNacimiento' : IDL.Text,
+              'cedula' : IDL.Text,
             }),
             'Err' : IDL.Variant({ 'UserDoesNotExist' : IDL.Text }),
           }),
@@ -35,10 +60,15 @@ export const idlFactory = ({ IDL }) => {
           IDL.Opt(
             IDL.Record({
               'id' : IDL.Principal,
+              'direccion' : IDL.Text,
+              'tokensPorValidar' : IDL.Int,
               'alias' : IDL.Text,
               'nombre' : IDL.Text,
               'segundoApellido' : IDL.Text,
               'primerApellido' : IDL.Text,
+              'tokensValidados' : IDL.Int,
+              'fechaNacimiento' : IDL.Text,
+              'cedula' : IDL.Text,
             })
           ),
         ],
@@ -50,25 +80,46 @@ export const idlFactory = ({ IDL }) => {
           IDL.Vec(
             IDL.Record({
               'id' : IDL.Principal,
+              'direccion' : IDL.Text,
+              'tokensPorValidar' : IDL.Int,
               'alias' : IDL.Text,
               'nombre' : IDL.Text,
               'segundoApellido' : IDL.Text,
               'primerApellido' : IDL.Text,
+              'tokensValidados' : IDL.Int,
+              'fechaNacimiento' : IDL.Text,
+              'cedula' : IDL.Text,
             })
           ),
         ],
         ['query'],
       ),
     'updateUser' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Int,
+          IDL.Int,
+        ],
         [
           IDL.Variant({
             'Ok' : IDL.Record({
               'id' : IDL.Principal,
+              'direccion' : IDL.Text,
+              'tokensPorValidar' : IDL.Int,
               'alias' : IDL.Text,
               'nombre' : IDL.Text,
               'segundoApellido' : IDL.Text,
               'primerApellido' : IDL.Text,
+              'tokensValidados' : IDL.Int,
+              'fechaNacimiento' : IDL.Text,
+              'cedula' : IDL.Text,
             }),
             'Err' : IDL.Variant({ 'UserDoesNotExist' : IDL.Text }),
           }),
