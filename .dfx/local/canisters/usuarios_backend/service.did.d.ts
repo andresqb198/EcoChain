@@ -4,13 +4,18 @@ import type { IDL } from '@dfinity/candid';
 
 export interface _SERVICE {
   'createUser' : ActorMethod<
-    [string, string, string, string],
+    [string, string, string, string, string, string, string, bigint, bigint],
     {
       'id' : Principal,
+      'direccion' : string,
+      'tokensPorValidar' : bigint,
       'alias' : string,
       'nombre' : string,
       'segundoApellido' : string,
       'primerApellido' : string,
+      'tokensValidados' : bigint,
+      'fechaNacimiento' : string,
+      'cedula' : string,
     }
   >,
   'deleteUser' : ActorMethod<
@@ -18,10 +23,15 @@ export interface _SERVICE {
     {
         'Ok' : {
           'id' : Principal,
+          'direccion' : string,
+          'tokensPorValidar' : bigint,
           'alias' : string,
           'nombre' : string,
           'segundoApellido' : string,
           'primerApellido' : string,
+          'tokensValidados' : bigint,
+          'fechaNacimiento' : string,
+          'cedula' : string,
         }
       } |
       { 'Err' : { 'UserDoesNotExist' : string } }
@@ -31,10 +41,15 @@ export interface _SERVICE {
     [] | [
       {
         'id' : Principal,
+        'direccion' : string,
+        'tokensPorValidar' : bigint,
         'alias' : string,
         'nombre' : string,
         'segundoApellido' : string,
         'primerApellido' : string,
+        'tokensValidados' : bigint,
+        'fechaNacimiento' : string,
+        'cedula' : string,
       }
     ]
   >,
@@ -43,22 +58,43 @@ export interface _SERVICE {
     Array<
       {
         'id' : Principal,
+        'direccion' : string,
+        'tokensPorValidar' : bigint,
         'alias' : string,
         'nombre' : string,
         'segundoApellido' : string,
         'primerApellido' : string,
+        'tokensValidados' : bigint,
+        'fechaNacimiento' : string,
+        'cedula' : string,
       }
     >
   >,
   'updateUser' : ActorMethod<
-    [string, string, string, string, string],
+    [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      bigint,
+      bigint,
+    ],
     {
         'Ok' : {
           'id' : Principal,
+          'direccion' : string,
+          'tokensPorValidar' : bigint,
           'alias' : string,
           'nombre' : string,
           'segundoApellido' : string,
           'primerApellido' : string,
+          'tokensValidados' : bigint,
+          'fechaNacimiento' : string,
+          'cedula' : string,
         }
       } |
       { 'Err' : { 'UserDoesNotExist' : string } }

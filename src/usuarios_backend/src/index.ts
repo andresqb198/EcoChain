@@ -9,9 +9,12 @@ import {
     Result,
     StableBTreeMap,
     text,
+    int,
     update,
     Variant,
-    Vec
+    Vec,
+    nat64
+    
 } from 'azle';
 
 const User = Record({
@@ -19,9 +22,23 @@ const User = Record({
     nombre: text,
     primerApellido: text,
     segundoApellido: text,
-    alias: text
+    alias: text,
+    cedula: text,
+    fechaNacimiento: text,
+    direccion: text,
+    tokensValidados: int,
+    tokensPorValidar: int
+
 });
 type User = typeof User.tsType;
+
+const Action = Record({
+    nombre: text,
+    tipo: text,
+    fecha: text,
+    descripcion: text
+});
+type Action = typeof Action.tsType;
 
 const AplicationError = Variant({
     UserDoesNotExist: text
@@ -30,16 +47,23 @@ const AplicationError = Variant({
 type AplicationError = typeof AplicationError.tsType;
 
 let users = StableBTreeMap<Principal, User>(0);
+let actions = StableBTreeMap<int, Action>(0);
 
 export default Canister({
-    createUser: update([text, text, text, text], User, (nombre, primerApellido, segundoApellido, alias) => {
+    createUser: update([text, text, text, text,text,text,text, int, int], User, (nombre, primerApellido, segundoApellido, alias, cedula,fechaNacimiento,direccion, tokensValidados, tokensPorValidar) => {
         const id = generateId();
         const user: User = {
             id:id,
             nombre: nombre,
             primerApellido: primerApellido,
             segundoApellido: segundoApellido,
-            alias: alias
+            alias: alias,
+            cedula: cedula,
+            fechaNacimiento: fechaNacimiento,
+            direccion: direccion,
+            tokensValidados: tokensValidados,
+            tokensPorValidar: tokensPorValidar
+
         };
 
         users.insert(user.id, user);
@@ -67,9 +91,9 @@ export default Canister({
         return Ok(user);
     }),
     updateUser: update(
-        [text, text, text, text, text],
+        [text, text, text, text, text, text, text, text, int, int],
         Result(User, AplicationError),
-        (userId, nombre, primerApellido, segundoApellido, alias) => {
+        (userId, nombre, primerApellido, segundoApellido, alias, cedula, fechaNacimiento, direccion, tokensValidados, tokensPorValidar) => {
             const userOpt = users.get(Principal.fromText(userId));
 
             if ('None' in userOpt) {
@@ -82,7 +106,12 @@ export default Canister({
                 nombre: nombre,
                 primerApellido: primerApellido,
                 segundoApellido: segundoApellido,
-                alias: alias
+                alias: alias,
+                cedula: cedula,
+                fechaNacimiento: fechaNacimiento,
+                direccion: direccion,
+                tokensValidados: tokensValidados,
+                tokensPorValidar: tokensPorValidar
             };
 
             users.remove(Principal.fromText(userId))
@@ -90,7 +119,20 @@ export default Canister({
 
             return Ok(newUser);
         }
-    )
+    ),
+
+    createAction: update([text, text, text, text], int, (nombre, tipo, fecha, descripcion) => {
+        let one: nat64 = BigInt(1);
+        const action: Action = { 
+            nombre: nombre, 
+            tipo: tipo, 
+            fecha: fecha, 
+            descripcion: descripcion };
+            const id = actions.len() + one
+
+        actions.insert(id, action);
+        return id;
+      }),
 })
 
 function generateId(): Principal {
