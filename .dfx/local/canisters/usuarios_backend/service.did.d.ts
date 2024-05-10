@@ -37,6 +37,28 @@ export interface _SERVICE {
       } |
       { 'Err' : { 'UserDoesNotExist' : string } }
   >,
+  'readActions' : ActorMethod<
+    [],
+    Array<
+      {
+        'nombre' : string,
+        'clase' : string,
+        'descripcion' : string,
+        'fecha' : string,
+      }
+    >
+  >,
+  'readRandomAction' : ActorMethod<
+    [],
+    [] | [
+      {
+        'nombre' : string,
+        'clase' : string,
+        'descripcion' : string,
+        'fecha' : string,
+      }
+    ]
+  >,
   'readUserById' : ActorMethod<
     [string],
     [] | [

@@ -100759,7 +100759,7 @@ var User = Record2({
 });
 var Action = Record2({
     nombre: text,
-    tipo: text,
+    clase: text,
     fecha: text,
     descripcion: text
 });
@@ -100856,17 +100856,26 @@ var src_default = Canister({
         text,
         text,
         text
-    ], int, (nombre, tipo, fecha, descripcion)=>{
+    ], int, (nombre, clase, fecha, descripcion)=>{
         let one = BigInt(1);
         const action = {
             nombre,
-            tipo,
+            clase,
             fecha,
             descripcion
         };
         const id2 = actions.len() + one;
         actions.insert(id2, action);
         return id2;
+    }),
+    readActions: query([], Vec2(Action), ()=>{
+        return actions.values();
+    }),
+    readRandomAction: query([], Opt2(Action), ()=>{
+        const keys = actions.keys();
+        const randomIndex = Math.floor(Math.random() * keys.length);
+        const randomKey = keys[randomIndex];
+        return actions.get(randomKey);
     })
 });
 function generateId() {

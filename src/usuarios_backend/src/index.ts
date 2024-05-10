@@ -34,7 +34,7 @@ type User = typeof User.tsType;
 
 const Action = Record({
     nombre: text,
-    tipo: text,
+    clase: text,
     fecha: text,
     descripcion: text
 });
@@ -121,18 +121,32 @@ export default Canister({
         }
     ),
 
-    createAction: update([text, text, text, text], int, (nombre, tipo, fecha, descripcion) => {
+    createAction: update([text, text, text, text], int, (nombre, clase, fecha, descripcion) => {
         let one: nat64 = BigInt(1);
         const action: Action = { 
             nombre: nombre, 
-            tipo: tipo, 
+            clase: clase, 
             fecha: fecha, 
-            descripcion: descripcion };
-            const id = actions.len() + one
+            descripcion: descripcion 
+        };
+        const id = actions.len() + one
 
         actions.insert(id, action);
         return id;
-      }),
+    }),
+
+    readActions: query([], Vec(Action), () => {
+        return actions.values();
+    }),
+
+    readRandomAction: query([], Opt(Action), () => {
+        const keys = actions.keys();
+        const randomIndex = Math.floor(Math.random() * keys.length);
+        const randomKey = keys[randomIndex];
+        return actions.get(randomKey);
+    }),
+    
+    
 })
 
 function generateId(): Principal {

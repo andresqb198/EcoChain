@@ -54,6 +54,34 @@ export const idlFactory = ({ IDL }) => {
         ],
         [],
       ),
+    'readActions' : IDL.Func(
+        [],
+        [
+          IDL.Vec(
+            IDL.Record({
+              'nombre' : IDL.Text,
+              'clase' : IDL.Text,
+              'descripcion' : IDL.Text,
+              'fecha' : IDL.Text,
+            })
+          ),
+        ],
+        ['query'],
+      ),
+    'readRandomAction' : IDL.Func(
+        [],
+        [
+          IDL.Opt(
+            IDL.Record({
+              'nombre' : IDL.Text,
+              'clase' : IDL.Text,
+              'descripcion' : IDL.Text,
+              'fecha' : IDL.Text,
+            })
+          ),
+        ],
+        ['query'],
+      ),
     'readUserById' : IDL.Func(
         [IDL.Text],
         [

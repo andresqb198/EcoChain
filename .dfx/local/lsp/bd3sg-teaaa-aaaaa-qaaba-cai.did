@@ -31,6 +31,22 @@ service : {
         Err : variant { UserDoesNotExist : text };
       },
     );
+  readActions : () -> (
+      vec record {
+        nombre : text;
+        clase : text;
+        descripcion : text;
+        fecha : text;
+      },
+    ) query;
+  readRandomAction : () -> (
+      opt record {
+        nombre : text;
+        clase : text;
+        descripcion : text;
+        fecha : text;
+      },
+    ) query;
   readUserById : (text) -> (
       opt record {
         id : principal;
