@@ -3,6 +3,7 @@ import type { ActorMethod } from '@dfinity/agent';
 import type { IDL } from '@dfinity/candid';
 
 export interface _SERVICE {
+  'createAction' : ActorMethod<[string, string, string, string], bigint>,
   'createUser' : ActorMethod<
     [string, string, string, string, string, string, string, bigint, bigint],
     {

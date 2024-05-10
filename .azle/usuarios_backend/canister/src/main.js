@@ -100767,6 +100767,7 @@ var AplicationError = Variant2({
     UserDoesNotExist: text
 });
 var users = StableBTreeMap(0);
+var actions = StableBTreeMap(0);
 var src_default = Canister({
     createUser: update([
         text,
@@ -100849,6 +100850,23 @@ var src_default = Canister({
         users.remove(Principal3.fromText(userId));
         users.insert(Principal3.fromText(userId), newUser);
         return Ok(newUser);
+    }),
+    createAction: update([
+        text,
+        text,
+        text,
+        text
+    ], int, (nombre, tipo, fecha, descripcion)=>{
+        let one = BigInt(1);
+        const action = {
+            nombre,
+            tipo,
+            fecha,
+            descripcion
+        };
+        const id2 = actions.len() + one;
+        actions.insert(id2, action);
+        return id2;
     })
 });
 function generateId() {

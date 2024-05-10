@@ -1,4 +1,5 @@
 service: () -> {
+    createAction: (text, text, text, text) -> (int);
     createUser: (text, text, text, text, text, text, text, int, int) -> (record {id:principal; direccion:text; tokensPorValidar:int; alias:text; nombre:text; segundoApellido:text; primerApellido:text; tokensValidados:int; fechaNacimiento:text; cedula:text});
     deleteUser: (text) -> (variant {Ok:record {id:principal; direccion:text; tokensPorValidar:int; alias:text; nombre:text; segundoApellido:text; primerApellido:text; tokensValidados:int; fechaNacimiento:text; cedula:text}; Err:variant {UserDoesNotExist:text}});
     readUserById: (text) -> (opt record {id:principal; direccion:text; tokensPorValidar:int; alias:text; nombre:text; segundoApellido:text; primerApellido:text; tokensValidados:int; fechaNacimiento:text; cedula:text}) query;

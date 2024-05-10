@@ -1,5 +1,10 @@
 export const idlFactory = ({ IDL }) => {
   return IDL.Service({
+    'createAction' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [IDL.Int],
+        [],
+      ),
     'createUser' : IDL.Func(
         [
           IDL.Text,

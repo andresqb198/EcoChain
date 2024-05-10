@@ -1,4 +1,5 @@
 service : () -> {
+  createAction : (text, text, text, text) -> (int);
   createUser : (text, text, text, text, text, text, text, int, int) -> (
       record {
         id : principal;
