@@ -33,6 +33,7 @@ const User = Record({
 type User = typeof User.tsType;
 
 const Action = Record({
+    idUsuario: Principal, 
     nombre: text,
     clase: text,
     fecha: text,
@@ -121,9 +122,10 @@ export default Canister({
         }
     ),
 
-    createAction: update([text, text, text, text], int, (nombre, clase, fecha, descripcion) => {
+    createAction: update([text, text, text, text, text], int, (userId, nombre, clase, fecha, descripcion) => {
         let one: nat64 = BigInt(1);
         const action: Action = { 
+            idUsuario: Principal.fromText(userId), // Asignar el ID del usuario
             nombre: nombre, 
             clase: clase, 
             fecha: fecha, 
@@ -133,6 +135,10 @@ export default Canister({
 
         actions.insert(id, action);
         return id;
+    }),
+
+    readActionsByUser: query([text], Vec(Action), (userId) => {
+        return actions.values().filter(action => action.idUsuario.toString() === userId);
     }),
 
     readActions: query([], Vec(Action), () => {

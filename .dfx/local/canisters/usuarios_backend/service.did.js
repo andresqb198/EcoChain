@@ -1,7 +1,7 @@
 export const idlFactory = ({ IDL }) => {
   return IDL.Service({
     'createAction' : IDL.Func(
-        [IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
         [IDL.Int],
         [],
       ),
@@ -60,6 +60,22 @@ export const idlFactory = ({ IDL }) => {
           IDL.Vec(
             IDL.Record({
               'nombre' : IDL.Text,
+              'idUsuario' : IDL.Principal,
+              'clase' : IDL.Text,
+              'descripcion' : IDL.Text,
+              'fecha' : IDL.Text,
+            })
+          ),
+        ],
+        ['query'],
+      ),
+    'readActionsByUser' : IDL.Func(
+        [IDL.Text],
+        [
+          IDL.Vec(
+            IDL.Record({
+              'nombre' : IDL.Text,
+              'idUsuario' : IDL.Principal,
               'clase' : IDL.Text,
               'descripcion' : IDL.Text,
               'fecha' : IDL.Text,
@@ -74,6 +90,7 @@ export const idlFactory = ({ IDL }) => {
           IDL.Opt(
             IDL.Record({
               'nombre' : IDL.Text,
+              'idUsuario' : IDL.Principal,
               'clase' : IDL.Text,
               'descripcion' : IDL.Text,
               'fecha' : IDL.Text,

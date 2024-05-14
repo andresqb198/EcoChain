@@ -1,9 +1,10 @@
 service: () -> {
-    createAction: (text, text, text, text) -> (int);
+    createAction: (text, text, text, text, text) -> (int);
     createUser: (text, text, text, text, text, text, text, int, int) -> (record {id:principal; direccion:text; tokensPorValidar:int; alias:text; nombre:text; segundoApellido:text; primerApellido:text; tokensValidados:int; fechaNacimiento:text; cedula:text});
     deleteUser: (text) -> (variant {Ok:record {id:principal; direccion:text; tokensPorValidar:int; alias:text; nombre:text; segundoApellido:text; primerApellido:text; tokensValidados:int; fechaNacimiento:text; cedula:text}; Err:variant {UserDoesNotExist:text}});
-    readActions: () -> (vec record {nombre:text; clase:text; descripcion:text; fecha:text}) query;
-    readRandomAction: () -> (opt record {nombre:text; clase:text; descripcion:text; fecha:text}) query;
+    readActions: () -> (vec record {nombre:text; idUsuario:principal; clase:text; descripcion:text; fecha:text}) query;
+    readActionsByUser: (text) -> (vec record {nombre:text; idUsuario:principal; clase:text; descripcion:text; fecha:text}) query;
+    readRandomAction: () -> (opt record {nombre:text; idUsuario:principal; clase:text; descripcion:text; fecha:text}) query;
     readUserById: (text) -> (opt record {id:principal; direccion:text; tokensPorValidar:int; alias:text; nombre:text; segundoApellido:text; primerApellido:text; tokensValidados:int; fechaNacimiento:text; cedula:text}) query;
     readUsers: () -> (vec record {id:principal; direccion:text; tokensPorValidar:int; alias:text; nombre:text; segundoApellido:text; primerApellido:text; tokensValidados:int; fechaNacimiento:text; cedula:text}) query;
     updateUser: (text, text, text, text, text, text, text, text, int, int) -> (variant {Ok:record {id:principal; direccion:text; tokensPorValidar:int; alias:text; nombre:text; segundoApellido:text; primerApellido:text; tokensValidados:int; fechaNacimiento:text; cedula:text}; Err:variant {UserDoesNotExist:text}});

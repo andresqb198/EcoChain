@@ -100758,6 +100758,7 @@ var User = Record2({
     tokensPorValidar: int
 });
 var Action = Record2({
+    idUsuario: Principal3,
     nombre: text,
     clase: text,
     fecha: text,
@@ -100855,10 +100856,13 @@ var src_default = Canister({
         text,
         text,
         text,
+        text,
         text
-    ], int, (nombre, clase, fecha, descripcion)=>{
+    ], int, (userId, nombre, clase, fecha, descripcion)=>{
         let one = BigInt(1);
         const action = {
+            idUsuario: Principal3.fromText(userId),
+            // Asignar el ID del usuario
             nombre,
             clase,
             fecha,
@@ -100867,6 +100871,11 @@ var src_default = Canister({
         const id2 = actions.len() + one;
         actions.insert(id2, action);
         return id2;
+    }),
+    readActionsByUser: query([
+        text
+    ], Vec2(Action), (userId)=>{
+        return actions.values().filter((action)=>action.idUsuario.toString() === userId);
     }),
     readActions: query([], Vec2(Action), ()=>{
         return actions.values();

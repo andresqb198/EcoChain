@@ -1,5 +1,5 @@
 service : () -> {
-  createAction : (text, text, text, text) -> (int);
+  createAction : (text, text, text, text, text) -> (int);
   createUser : (text, text, text, text, text, text, text, int, int) -> (
       record {
         id : principal;
@@ -34,6 +34,16 @@ service : () -> {
   readActions : () -> (
       vec record {
         nombre : text;
+        idUsuario : principal;
+        clase : text;
+        descripcion : text;
+        fecha : text;
+      },
+    ) query;
+  readActionsByUser : (text) -> (
+      vec record {
+        nombre : text;
+        idUsuario : principal;
         clase : text;
         descripcion : text;
         fecha : text;
@@ -42,6 +52,7 @@ service : () -> {
   readRandomAction : () -> (
       opt record {
         nombre : text;
+        idUsuario : principal;
         clase : text;
         descripcion : text;
         fecha : text;
